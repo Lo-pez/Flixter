@@ -87,9 +87,7 @@ public class MovieDetails extends AppCompatActivity {
     }
 
     public void intent(View view) {
-        NOW_PLAYING_URL = String.format("https://api.themoviedb.org/3/movie/now_playing?api_key=%s" , getString(R.string.now_playing_api_key));
-
-        final String YOUTUBE_URL = "https://api.themoviedb.org/3/movie/" + movie.getId() +"/videos?api_key=cfb00a4c2592c9b1add073e120f6f4c5&language=en-US";
+        String YOUTUBE_URL = String.format("https://api.themoviedb.org/3/movie/" + movie.getId() +"/videos?api_key=%s" , getString(R.string.now_playing_api_key));
         List<String> video = new ArrayList<>();
         String TAG = "intent";
 
