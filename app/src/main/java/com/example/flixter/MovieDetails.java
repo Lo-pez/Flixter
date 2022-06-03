@@ -37,7 +37,10 @@ public class MovieDetails extends AppCompatActivity {
     TextView tvTitle;
     TextView tvOverview;
     ImageView tvPreview;
+    ImageView tvLogo;
     RatingBar rbVoteAverage;
+
+    public String NOW_PLAYING_URL;
 
     private ActivityMovieDetailsBinding binding;
 
@@ -54,6 +57,7 @@ public class MovieDetails extends AppCompatActivity {
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvOverview = (TextView) findViewById(R.id.tvOverview);
         tvPreview = (ImageView) findViewById(R.id.tvPreview);
+        tvLogo = (ImageView) findViewById(R.id.tvLogo);
         rbVoteAverage = (RatingBar) findViewById(R.id.rbVoteAverage);
 
         // unwrap the movie passed in via intent, using its simple name as a key
@@ -77,9 +81,14 @@ public class MovieDetails extends AppCompatActivity {
                 .load(imageUrl)
                 .placeholder(placeholderUrl)
                 .into(tvPreview);
+        Glide.with(this)
+                .load(R.drawable.yt3)
+                .into(tvLogo);
     }
 
     public void intent(View view) {
+        NOW_PLAYING_URL = String.format("https://api.themoviedb.org/3/movie/now_playing?api_key=%s" , getString(R.string.now_playing_api_key));
+
         final String YOUTUBE_URL = "https://api.themoviedb.org/3/movie/" + movie.getId() +"/videos?api_key=cfb00a4c2592c9b1add073e120f6f4c5&language=en-US";
         List<String> video = new ArrayList<>();
         String TAG = "intent";
@@ -93,9 +102,7 @@ public class MovieDetails extends AppCompatActivity {
                     JSONArray results = jsonObject.getJSONArray("results");
                     JSONObject resultsJSONObject = results.getJSONObject(0);
                     video.add(resultsJSONObject.get("key").toString());
-                    Intent i = new Intent(getApplicationContext(), MovieTrailerActivity.class);
-                    i.putExtra("id", video.get(0));
-                    startActivity(i);
+
 
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit JSON exception", e);

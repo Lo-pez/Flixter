@@ -27,7 +27,7 @@ import okhttp3.Headers;
 public class MainActivity extends AppCompatActivity {
 
 //    public static final String NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=cfb00a4c2592c9b1add073e120f6f4c5";
-    public static final String NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=cfb00a4c2592c9b1add073e120f6f4c5";
+    public String NOW_PLAYING_URL;
 
     public static final String TAG = "MainActivity";
 
@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        NOW_PLAYING_URL = String.format("https://api.themoviedb.org/3/movie/now_playing?api_key=%s" , getString(R.string.now_playing_api_key));
+
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
