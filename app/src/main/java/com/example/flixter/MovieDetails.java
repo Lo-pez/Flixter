@@ -102,7 +102,9 @@ public class MovieDetails extends AppCompatActivity {
                     JSONArray results = jsonObject.getJSONArray("results");
                     JSONObject resultsJSONObject = results.getJSONObject(0);
                     video.add(resultsJSONObject.get("key").toString());
-
+                    Intent i = new Intent(getApplicationContext(), MovieTrailerActivity.class);
+                    i.putExtra("id", video.get(0));
+                    startActivity(i);
 
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit JSON exception", e);
